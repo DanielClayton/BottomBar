@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_shop"
+        icon="@drawable/home_icon_on"
+        title="@string/bb_shop" />
+    <tab
+        id="@+id/tab_gift"
+        icon="@drawable/steak_icon"
+        title="@string/bb_gifting" />
+    <tab
+        id="@+id/tab_3"
+        icon="@drawable/steak_icon"
+        title="@string/bb_gifting" />
+    <tab
+        id="@+id/tab_4"
+        icon="@drawable/steak_icon"
+        title="@string/bb_gifting" />
+    <tab
+        id="@+id/tab_steak"
+        icon="@drawable/steak_icon"
+        title="@string/bb_gifting" />
+</tabs>

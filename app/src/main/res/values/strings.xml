@@ -16,4 +16,14 @@ Nam molestie nec tortor. Donec placerat leo sit amet velit. Vestibulum id justo 
 
 Vivamus placerat lacus vel vehicula scelerisque, dui enim adipiscing lacus sit amet sagittis, libero enim vitae mi. In neque magna posuere, euismod ac tincidunt tempor est. Ut suscipit nisi eu purus. Proin ut pede mauris eget ipsum. Integer vel quam nunc commodo consequat. Integer ac eros eu tellus dignissim viverra. Maecenas erat aliquam erat volutpat. Ut venenatis ipsum quis turpis. Integer cursus scelerisque lorem. Sed nec mauris id quam blandit consequat. Cras nibh mi hendrerit vitae, dapibus et aliquam et magna. Nulla vitae elit. Mauris consectetuer odio vitae augue.</string>
     <string name="title_activity_custom_color">CustomColorActivity</string>
+
+    <!--FragmentActivity-->
+    <string name="bb_shop">Shop</string>
+    <string name="bb_gifting">Gifting</string>
+    <string name="bb_rewards">Rewards</string>
+    <string name="bb_stores">Stores</string>
+    <string name="bb_cooking">Cooking</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

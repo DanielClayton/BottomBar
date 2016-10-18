@@ -67,7 +67,7 @@ public class BottomBarTab extends LinearLayout {
     private Typeface titleTypeFace;
 
     enum Type {
-        FIXED, SHIFTING, TABLET
+        FIXED, SHIFTING, TABLET, FIXED_HEIGHT
     }
 
     BottomBarTab(Context context) {
@@ -123,6 +123,9 @@ public class BottomBarTab extends LinearLayout {
                 break;
             case TABLET:
                 layoutResource = R.layout.bb_bottom_bar_item_fixed_tablet;
+                break;
+            case FIXED_HEIGHT:
+                layoutResource = R.layout.bb_bottom_bar_item_fixed_height;
                 break;
             default:
                 // should never happen
@@ -348,17 +351,33 @@ public class BottomBarTab extends LinearLayout {
     void select(boolean animate) {
         isActive = true;
 
-        if (animate) {
-            setTopPaddingAnimated(iconView.getPaddingTop(), sixDps);
-            animateIcon(activeAlpha);
-            animateTitle(ACTIVE_TITLE_SCALE, activeAlpha);
-            animateColors(inActiveColor, activeColor);
+        boolean isFixedHeight = type == Type.FIXED_HEIGHT;
+        float scale = isFixedHeight ? INACTIVE_FIXED_TITLE_SCALE : ACTIVE_TITLE_SCALE;
+        int iconPaddingTop = isFixedHeight ? sixteenDps : sixDps;
+
+        if (!isFixedHeight) {
+            if (animate) {
+                setTopPaddingAnimated(iconView.getPaddingTop(), sixDps);
+                animateIcon(activeAlpha);
+                animateTitle(ACTIVE_TITLE_SCALE, activeAlpha);
+                animateColors(inActiveColor, activeColor);
+            } else {
+                setTitleScale(ACTIVE_TITLE_SCALE);
+                setTopPadding(sixDps);
+                setColors(activeColor);
+                setAlphas(activeAlpha);
+            }
         } else {
-            setTitleScale(ACTIVE_TITLE_SCALE);
-            setTopPadding(sixDps);
-            setColors(activeColor);
-            setAlphas(activeAlpha);
+            if (animate) {
+                animateIcon(activeAlpha);
+                animateTitle(1, activeAlpha);
+                animateColors(inActiveColor, activeColor);
+            } else {
+                setColors(activeColor);
+                setAlphas(activeAlpha);
+            }
         }
+
 
         if (badge != null) {
             badge.hide();
@@ -368,21 +387,33 @@ public class BottomBarTab extends LinearLayout {
     void deselect(boolean animate) {
         isActive = false;
 
+        boolean isFixedHeight = type == Type.FIXED_HEIGHT;
         boolean isShifting = type == Type.SHIFTING;
 
-        float scale = isShifting ? 0 : INACTIVE_FIXED_TITLE_SCALE;
-        int iconPaddingTop = isShifting ? sixteenDps : eightDps;
+        float scale = isFixedHeight ? INACTIVE_FIXED_TITLE_SCALE : (isShifting ? 0 : INACTIVE_FIXED_TITLE_SCALE);
+        int iconPaddingTop = isFixedHeight ? sixteenDps : (isShifting ? sixteenDps : eightDps);
 
-        if (animate) {
-            setTopPaddingAnimated(iconView.getPaddingTop(), iconPaddingTop);
-            animateTitle(scale, inActiveAlpha);
-            animateIcon(inActiveAlpha);
-            animateColors(activeColor, inActiveColor);
+        if (!isFixedHeight) {
+            if (animate) {
+                setTopPaddingAnimated(iconView.getPaddingTop(), iconPaddingTop);
+                animateTitle(scale, inActiveAlpha);
+                animateIcon(inActiveAlpha);
+                animateColors(activeColor, inActiveColor);
+            } else {
+                setTitleScale(scale);
+                setTopPadding(iconPaddingTop);
+                setColors(inActiveColor);
+                setAlphas(inActiveAlpha);
+            }
         } else {
-            setTitleScale(scale);
-            setTopPadding(iconPaddingTop);
-            setColors(inActiveColor);
-            setAlphas(inActiveAlpha);
+            if (animate) {
+                animateTitle(1, inActiveAlpha);
+                animateIcon(inActiveAlpha);
+                animateColors(activeColor, inActiveColor);
+            } else {
+                setColors(inActiveColor);
+                setAlphas(inActiveAlpha);
+            }
         }
 
         if (!isShifting && badge != null) {
@@ -397,7 +428,7 @@ public class BottomBarTab extends LinearLayout {
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-               setColors((Integer) valueAnimator.getAnimatedValue());
+                setColors((Integer) valueAnimator.getAnimatedValue());
             }
         });
 

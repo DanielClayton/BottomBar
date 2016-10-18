@@ -59,6 +59,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
     private static final int BEHAVIOR_SHIFTING = 1;
     private static final int BEHAVIOR_SHY = 2;
     private static final int BEHAVIOR_DRAW_UNDER_NAV = 4;
+    private static final int BEHAVIOR_FIXED_HEIGHT = 8;
 
     private int primaryColor;
     private int screenWidth;
@@ -151,6 +152,10 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
 
     private boolean isShiftingMode() {
         return !isTabletMode && hasBehavior(BEHAVIOR_SHIFTING);
+    }
+
+    private boolean isFixedHeightMode() {
+        return !isTabletMode && hasBehavior(BEHAVIOR_FIXED_HEIGHT);
     }
 
     private boolean drawUnderNav() {
@@ -263,6 +268,8 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
 
             if (isShiftingMode()) {
                 type = BottomBarTab.Type.SHIFTING;
+            } else if (isFixedHeightMode()) {
+                type = BottomBarTab.Type.FIXED_HEIGHT;
             } else if (isTabletMode) {
                 type = BottomBarTab.Type.TABLET;
             } else {
@@ -557,14 +564,19 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
                 continue;
             }
 
-            int baseline = title.getBaseline();
-            int height = title.getHeight();
-            int paddingInsideTitle = height - baseline;
-            int missingPadding = tenDp - paddingInsideTitle;
+            if (!hasBehavior(BEHAVIOR_FIXED_HEIGHT)) {
+                int baseline = title.getBaseline();
+                int height = title.getHeight();
+                int paddingInsideTitle = height - baseline;
+                int missingPadding = tenDp - paddingInsideTitle;
 
-            if (missingPadding > 0) {
-                title.setPadding(title.getPaddingLeft(), title.getPaddingTop(),
-                        title.getPaddingRight(), missingPadding + title.getPaddingBottom());
+
+                if (missingPadding > 0) {
+                    title.setPadding(title.getPaddingLeft(), title.getPaddingTop(),
+                            title.getPaddingRight(), missingPadding + title.getPaddingBottom());
+                }
+            } else {
+                title.setPadding(0, 0, 0, 0);
             }
         }
     }
