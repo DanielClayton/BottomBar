@@ -6,16 +6,19 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,6 +60,7 @@ public class BottomBarTab extends LinearLayout {
 
     private AppCompatImageView iconView;
     private TextView titleView;
+    private ImageView badgeView;
     private boolean isActive;
 
     private int indexInContainer;
@@ -106,6 +110,8 @@ public class BottomBarTab extends LinearLayout {
             titleView = (TextView) findViewById(R.id.bb_bottom_bar_title);
             titleView.setText(title);
         }
+
+        badgeView = (AppCompatImageView) findViewById(R.id.bb_bottom_bar_optional_badge);
 
         updateCustomTextAppearance();
         updateCustomTypeface();
@@ -177,6 +183,18 @@ public class BottomBarTab extends LinearLayout {
 
     void setIconResId(int iconResId) {
         this.iconResId = iconResId;
+    }
+
+    public void showTabBadge() {
+        badgeView.setVisibility(VISIBLE);
+    }
+
+    public void hideTabBadge() {
+        badgeView.setVisibility(INVISIBLE);
+    }
+
+    public void setBadgeDrawable(@DrawableRes int resId) {
+        badgeView.setImageResource(resId);
     }
 
     String getTitle() {
@@ -251,7 +269,7 @@ public class BottomBarTab extends LinearLayout {
         return badgeBackgroundColor;
     }
 
-    void setBadgeBackgroundColor(int badgeBackgroundColor) {
+    public void setBadgeBackgroundColor(int badgeBackgroundColor) {
         this.badgeBackgroundColor = badgeBackgroundColor;
 
         if (badge != null) {

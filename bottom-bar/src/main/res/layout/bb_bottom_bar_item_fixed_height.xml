@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/bb_bottom_bar_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:maxWidth="19dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/bb_bottom_bar_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="14dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:layout_alignParentBottom="true"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/bb_bottom_bar_optional_badge"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginTop="10dp"
+            android:gravity="top|right"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/bb_bottom_bar_title"
@@ -17,7 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginTop="6dp"
-        android:textAppearance="@style/BB_BottomBarItem_Fixed.TitleAppearance"/>
+        android:textAppearance="@style/BB_BottomBarItem_Fixed.TitleAppearance" />
 
 </merge>
