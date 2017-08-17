@@ -14,6 +14,12 @@
         android:layout_marginBottom="16dp" />
 
     <Button
+        android:id="@+id/five_fixed_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Five tabs, fixed height images" />
+
+    <Button
         android:id="@+id/simple_three_tabs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

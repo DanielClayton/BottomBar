@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        findViewById(R.id.five_fixed_height).setOnClickListener(this);
         findViewById(R.id.simple_three_tabs).setOnClickListener(this);
         findViewById(R.id.five_tabs_changing_colors).setOnClickListener(this);
         findViewById(R.id.three_tabs_quick_return).setOnClickListener(this);
@@ -25,6 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Class clazz = null;
 
         switch (v.getId()) {
+            case R.id.five_fixed_height:
+                clazz = FiveFixedHeightActivity.class;
+                break;
             case R.id.simple_three_tabs:
                 clazz = ThreeTabsActivity.class;
                 break;
